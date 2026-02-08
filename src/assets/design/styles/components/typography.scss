@@ -1,0 +1,24 @@
+@use "imports/colors.module";
+h1 {
+  font-size: 3.75rem;
+}
+h2 {
+  font-size: 3rem;
+}
+h3 {
+  font-size: 2.125rem;
+}
+h4 {
+  font-size: 1.5rem;
+}
+h5 {
+  font-size: 1.25rem;
+}
+h6 {
+  font-size: 1rem;
+  line-height: 1.25rem;
+}
+
+.alertColor {
+  color: colors.$gold;
+}

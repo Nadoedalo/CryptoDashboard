@@ -1,0 +1,57 @@
+@use "components/imports/variables";
+@use "components/imports/colors.module";
+@use "components/imports/breakpoints";
+@use "components/typography";
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background: colors.$bgColor;
+  font-size: variables.$font-size;
+  font-family: variables.$main-font;
+  color: colors.$white;
+  margin: 0;
+  padding: 0;
+  overflow: hidden !important;
+  @include breakpoints.media-breakpoint-up(variables.$full-hd) {
+      font-size: 16px;
+  }
+}
+
+#__nuxt {
+  width: 100%;
+  height: 100%;
+  > .v-application {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+a {
+  color: colors.$white;
+  text-decoration: none;
+}
+
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: all 0.2s;
+}
+.slide-right-enter-from {
+  opacity: 0;
+  transform: translate(0, -50px);
+}
+.slide-right-leave-to {
+  opacity: 0;
+  transform: translate(0, 50px);
+}
+
+.layout-enter-active,
+.layout-leave-active {
+  transition: all 0.2s;
+}
+
+.layout-enter-from,
+.layout-leave-to {
+  opacity: 0;
+  transform: translate(-100px, 0);
+}

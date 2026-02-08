@@ -1,0 +1,16 @@
+$font-size: 14px;
+$font-size-larger: 16px;
+$main-font: Roboto, sans-serif;
+$min-width: xs;
+$max-width: xl;
+$desktop-breakpoint: lg;
+$full-hd: xxl;
+
+$grid-breakpoints: (
+        xs: 320px,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+        xxl: 1400px,
+);
