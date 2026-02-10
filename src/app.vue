@@ -26,8 +26,18 @@
 <script lang="ts" setup>
 import { useLocaleHead } from '#imports';
 import { useI18n } from 'vue-i18n';
+import { useTheme } from 'vuetify';
 
 const { t, locale } = useI18n();
+const theme = useTheme();
+
+onMounted(() => {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme && savedTheme !== theme.global.name.value) {
+    theme.change(savedTheme);
+  }
+});
+
 const localeHead = useLocaleHead({
   dir: true,
   lang: true,

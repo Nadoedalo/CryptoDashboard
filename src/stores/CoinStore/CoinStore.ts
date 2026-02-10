@@ -1,8 +1,12 @@
 import type { ICoinListType } from '.';
 import { fetchHelper } from '~/utils/fetchHelper';
 import { mainConfig } from '~/config/main';
+import { useToastNotificationStore } from '@/stores/ToastNotificationStore/ToastNotificationStore';
+import { NOTIFICATION_TYPES } from '@stores/ToastNotificationStore';
 
 export const useCoinStore = defineStore('CoinStore', () => {
+  const toastStore = useToastNotificationStore();
+  const { $i18n } = useNuxtApp();
   /**
    * State section
    * */
@@ -25,6 +29,10 @@ export const useCoinStore = defineStore('CoinStore', () => {
     return coinArr.value.find(({ id }) => id === coinId)?.current_price;
   });
 
+  const getCoinById = computed(() => (coinId: ICoinListType['id']) => {
+    return coinArr.value.find(({ id }) => id === coinId) ?? null;
+  });
+
   /**
    * Actions section
    * */
@@ -43,7 +51,9 @@ export const useCoinStore = defineStore('CoinStore', () => {
     });
     isCoinArrLoading.value = false;
     if (status !== 200) {
-      // TODO add toast to inform user
+      toastStore.addToast({
+        text: $i18n.t('errors.fetchCoinList'),
+      });
       throw new Error(`[CoinStore] Failed to fetch coin list, status: ${status}`);
     }
     coinArr.value = data;
@@ -51,14 +61,17 @@ export const useCoinStore = defineStore('CoinStore', () => {
   }
 
   function autoRefreshCoinList() {
-    setTimeout(() => fetchCoinList().then(autoRefreshCoinList), 1000 * 60 * 60);
+    setTimeout(() => fetchCoinList().then(autoRefreshCoinList), 1000 * 60);
   }
 
   return {
     // state
     coinArr,
+    isCoinArrLoading,
     // getters
     getCoinCurrentPrice,
+    getCoinById,
     // actions
+    fetchCoinList,
   };
 });

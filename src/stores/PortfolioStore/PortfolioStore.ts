@@ -1,3 +1,4 @@
+import { skipHydrate } from 'pinia';
 import type { IHolding } from '.';
 import type { ICoin } from '@types';
 import { useCoinStore } from '@stores/CoinStore';
@@ -10,7 +11,10 @@ export const usePortfolioStore = defineStore('PortfolioStore', () => {
   /**
    * Startup section
    * */
-  portfolio.value = (JSON.parse(localStorage.getItem('portfolio') || '') || []) as IHolding[];
+  if (import.meta.client) {
+    portfolio.value = (JSON.parse(window.localStorage.getItem('portfolio') || '""') || []) as IHolding[];
+  }
+
   const coinStore = useCoinStore();
 
   /**
@@ -20,8 +24,10 @@ export const usePortfolioStore = defineStore('PortfolioStore', () => {
    * */
   watch(portfolio, () => {
     // The LocalStorage system can definitely be better, for example, by having a version control or a composable
-    localStorage.setItem('portfolio', JSON.stringify(portfolio.value));
-  });
+    if (import.meta.client) {
+      window.localStorage.setItem('portfolio', JSON.stringify(portfolio.value));
+    }
+  }, { deep: true });
 
   /**
    * Getters section
@@ -80,7 +86,7 @@ export const usePortfolioStore = defineStore('PortfolioStore', () => {
 
   return {
     // state
-    portfolio,
+    portfolio: skipHydrate(portfolio),
     // getters
     getInitialPortfolioEvaluation,
     getCurrentPortfolioEvaluation,

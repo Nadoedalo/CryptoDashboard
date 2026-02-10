@@ -18,6 +18,10 @@ $yellow-dark: #CC9C00;
 $red-light: #FA1919;
 $red: #CB2424;
 $red-dark: #992E30;
+/* Teal */
+$teal-light: #2DC5C9;
+$teal: #259CA5;
+$teal-dark: #186367;
 /* Blue */
 $blue-light: #075275;
 $blue: #024563;
@@ -51,4 +55,7 @@ $half-black: rgba(0,0,0,0.5);
   bgColor: $bgColor;
   quarter-black: $quarter-black;
   half-black: $half-black;
+  teal-light: $teal-light;
+  teal: $teal;
+  teal-dark: $teal-dark;
 }

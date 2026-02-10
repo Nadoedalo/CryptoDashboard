@@ -27,7 +27,9 @@ html, body {
     height: 100%;
   }
 }
-
+.dashboardSidebar {
+  z-index: 2026 !important;
+}
 .dashboardSidebar, .uiDashboardSidebarPlaceholder {
   min-width: 88px;
   width: 88px;
