@@ -1,11 +1,11 @@
 interface FetchResponse<T> {
-  status: number
-  data: T
+  status: number;
+  data: T;
 }
-
+// TODO: abort controller?
 export const fetchHelper = async <T>(url: RequestInfo, { body, method = 'GET' }: {
-  body?: unknown
-  method?: string
+  body?: unknown;
+  method?: string;
 } = {}): Promise<FetchResponse<T>> => {
   const options = {
     method,
@@ -15,8 +15,7 @@ export const fetchHelper = async <T>(url: RequestInfo, { body, method = 'GET' }:
   } as RequestInit;
   if (body && method === 'GET') {
     url = `${url}?${new URLSearchParams({ ...body })}`;
-  }
-  else if (body) {
+  } else if (body) {
     options.body = JSON.stringify(body);
   }
   const response = await fetch(url, options);

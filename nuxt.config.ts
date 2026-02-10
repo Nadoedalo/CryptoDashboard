@@ -17,6 +17,8 @@ export default defineNuxtConfig({
     '@': resolve('./src'),
     '@styles': resolve('./src/assets/design/styles'),
     '@imports': resolve('./src/assets/design/styles/components/imports'),
+    '@stores': resolve('./src/stores'),
+    '@types': resolve('./src/stores/sharedTypes'),
   },
   build: {
     transpile: ['vuetify'],
@@ -25,7 +27,12 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       // @ts-expect-error vuetify doesn't seem to support a proper configuration & this is in the official docs
-      vuetify({ autoImport: true }),
+      vuetify({
+        autoImport: true,
+        styles: {
+          configFile: './assets/design/styles/vuetifyTheme.scss',
+        },
+      }),
     ],
     vue: {
       template: {

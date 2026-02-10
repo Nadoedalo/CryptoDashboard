@@ -21,6 +21,7 @@ It also serves as a showcase for my Nuxt 4 skills.
 # Installation
 - Clone the repository
 - Run `yarn install`
+- Create `.env` file and add your [CoinGecko Demo API key](https://www.coingecko.com/en/api/pricing) to VITE_COINGECKO_API_KEY variable
 
 # Running the development server
 - Run `yarn run dev` or simply `yarn dev`
@@ -40,6 +41,8 @@ It also serves as a showcase for my Nuxt 4 skills.
 - Run `yarn run generate` or simply `yarn generate` to generate a static version of the app in the `dist/` folder
   - TODO: Deploy the contents of the `dist/` folder to the production
 
+# Architecture overview
+- TODO
 
 # Any known limitations or future improvements
 - ESLint is of version 9 because version 10 just released a couple of days ago, other packages need to be updated before we use latest

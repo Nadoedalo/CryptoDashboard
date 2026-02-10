@@ -11,6 +11,17 @@ export default withNuxt({
       avoidEscape: true,
       allowTemplateLiterals: 'always',
     }],
+    '@stylistic/member-delimiter-style': ['error', {
+      multiline: {
+        delimiter: 'semi',
+        requireLast: true,
+      },
+      singleline: {
+        delimiter: 'semi',
+        requireLast: true,
+      },
+    }],
+    '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: true }],
     'vue/html-quotes': ['error', 'double'],
   },
 });

@@ -35,6 +35,12 @@ export default defineNuxtPlugin((app) => {
             'blue-light': colors['blue-light'],
             'blue': colors.blue,
             'background': colors['gray-white'],
+            'primary': colors['blue-light'],
+            'secondary': colors['gray-light'],
+            'tertiary': colors['gray-dark'],
+            'success': colors.green,
+            'error': colors.red,
+            'warning': colors.yellow,
           },
         },
         dark: {
@@ -55,10 +61,17 @@ export default defineNuxtPlugin((app) => {
             'blue-light': colors['blue-light'],
             'blue': colors.blue,
             'background': colors.bgColor,
+            'primary': colors['blue-light'],
+            'secondary': colors['gray-light'],
+            'tertiary': colors['gray-dark'],
+            'success': colors.green,
+            'error': colors.red,
+            'warning': colors.yellow,
           },
         },
       },
     },
+
   });
   app.vueApp.use(vuetify);
 });
