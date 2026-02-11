@@ -21,6 +21,6 @@ definePageMeta({
 });
 window?.localStorage.clear();
 function goBack() {
-  window.location.href = '/';
+  window.location.href = '/CryptoDashboard';
 }
 </script>
