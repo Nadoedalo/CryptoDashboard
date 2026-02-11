@@ -29,6 +29,10 @@ export default defineNuxtConfig({
     transpile: ['vuetify'],
   },
   compatibilityDate: '2026-02-07',
+  // Tells Nitro to optimize for GitHub Pages
+  nitro: {
+    preset: 'github-pages',
+  },
   vite: {
     plugins: [
       // @ts-expect-error vuetify doesn't seem to support a proper configuration & this is in the official docs
