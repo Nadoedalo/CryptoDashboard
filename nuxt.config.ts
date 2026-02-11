@@ -38,7 +38,7 @@ export default defineNuxtConfig({
       failOnError: false,
       crawlLinks: true,
       // Explicitly define the routes to be crawled
-      routes: ['/'],
+      routes: ['/', '/dashboard', '/logout', '/portfolio', '/portfolio/add', '/portfolio/manage'],
     },
   },
   vite: {

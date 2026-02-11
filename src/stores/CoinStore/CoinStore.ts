@@ -64,7 +64,9 @@ export const useCoinStore = defineStore('CoinStore', () => {
   }
 
   function autoRefreshCoinList() {
-    setTimeout(() => fetchCoinList().finally(autoRefreshCoinList), 1000 * 60);
+    if (import.meta.client) {
+      setTimeout(() => fetchCoinList().finally(autoRefreshCoinList), 1000 * 60);
+    }
   }
 
   return {
