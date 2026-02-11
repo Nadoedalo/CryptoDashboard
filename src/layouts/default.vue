@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex w-100 h-100 overflow-hidden">
-    <NotificationToastWrapper />
+    <UiNotificationToastWrapper />
     <UiDashboardSidebar />
     <div class="uiDashboardSidebarPlaceholder" />
     <v-container class="flex-grow-1 mainContent h-100 w-100 d-flex pa-0 overflow-auto">

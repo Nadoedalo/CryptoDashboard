@@ -12,9 +12,9 @@
 </template>
 
 <script lang="ts" setup>
-import { type IToastNotification, NOTIFICATION_TYPES, useToastNotificationStore } from '@/stores/ToastNotificationStore';
+import { type IToastNotification, NOTIFICATION_TYPES, useToastNotificationStore } from '@stores/ToastNotificationStore';
 import { onMounted } from 'vue';
-import { mainConfig } from '@/config/main';
+import { mainConfig } from '~/config/main';
 
 const props = defineProps<IToastNotification>();
 const toastNotificationStore = useToastNotificationStore();

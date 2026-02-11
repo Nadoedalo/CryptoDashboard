@@ -62,6 +62,9 @@ html, body {
   }
 }
 
+.mainContent {
+  max-width: 100% !important;
+}
 .dashboardContent {
   min-width: map.get(variables.$grid-breakpoints, variables.$min-width);
 }

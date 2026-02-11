@@ -166,14 +166,14 @@ Documentation: https://www.coingecko.com/en/api/documentation
 
 ## Evaluation Criteria
 
-| Criteria | Weight | Description |
-| :---- | :---- | :---- |
-| **Code Quality** | 25% | Clean code, TypeScript usage, proper typing, no anti-patterns |
-| **Functionality** | 25% | All requirements implemented and working correctly |
-| **Architecture** | 20% | Project structure, component design, state management |
-| **UI/UX** | 15% | Visual design, responsiveness, user experience, error states |
-| **Testing & Docs** | 10% | Test coverage, documentation quality, setup instructions |
-| **Bonus Points** | 5% | Extra features, performance optimizations, creative solutions |
+| Criteria           | Weight | Description                                                   |
+|:-------------------|:-------|:--------------------------------------------------------------|
+| **Code Quality**   | 25%    | Clean code, TypeScript usage, proper typing, no anti-patterns |
+| **Functionality**  | 25%    | All requirements implemented and working correctly            |
+| **Architecture**   | 20%    | Project structure, component design, state management         |
+| **UI/UX**          | 15%    | Visual design, responsiveness, user experience, error states  |
+| **Testing & Docs** | 10%    | Test coverage, documentation quality, setup instructions      |
+| **Bonus Points**   | 5%     | Extra features, performance optimizations, creative solutions |
 
 ---
 

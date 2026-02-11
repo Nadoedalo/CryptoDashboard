@@ -1,13 +1,12 @@
 <template>
-  <!-- expand-on-hover can be a computed to disable on mobile resolutions -->
   <client-only>
+    <!-- expand-on-hover can be a computed to disable on mobile resolutions -->
     <v-navigation-drawer
       class="dashboardSidebar overflow-auto"
       expand-on-hover
       permanent
       rail
       color="teal-dark"
-      :order="24"
     >
       <v-container class="d-flex h-100 flex-column dashboardSidebarContent">
         <v-list>

@@ -24,15 +24,20 @@
                 :title="coinItem.raw.name"
                 class="pl-0"
               >
-                <template #prepend>
-                  <v-img
-                    :src="coinItem.raw.image"
-                    :alt="coinItem.raw.symbol"
-                    eager
-                    height="2em"
-                    width="2em"
-                    class="mr-2"
-                  />
+                <template
+                  v-if="coinItem.raw.image"
+                  #prepend
+                >
+                  <client-only>
+                    <v-img
+                      :src="coinItem.raw.image"
+                      :alt="coinItem.raw.symbol"
+                      eager
+                      height="2em"
+                      width="2em"
+                      class="mr-2"
+                    />
+                  </client-only>
                 </template>
               </v-list-item>
             </template>
@@ -41,15 +46,20 @@
                 v-bind="coinItemProps"
                 :title="coinItem.raw.name"
               >
-                <template #prepend>
-                  <v-img
-                    :src="coinItem.raw.image"
-                    :alt="coinItem.raw.symbol"
-                    eager
-                    height="2em"
-                    width="2em"
-                    class="mr-2"
-                  />
+                <template
+                  v-if="coinItem.raw.image"
+                  #prepend
+                >
+                  <client-only>
+                    <v-img
+                      :src="coinItem.raw.image"
+                      :alt="coinItem.raw.symbol"
+                      eager
+                      height="2em"
+                      width="2em"
+                      class="mr-2"
+                    />
+                  </client-only>
                 </template>
               </v-list-item>
             </template>
@@ -90,7 +100,6 @@ import { type ICoinListType, useCoinStore } from '@stores/CoinStore';
 import { usePortfolioStore } from '@stores/PortfolioStore';
 import { useToastNotificationStore } from '@stores/ToastNotificationStore/ToastNotificationStore';
 import { useI18n } from 'vue-i18n';
-import { NOTIFICATION_TYPES } from '@stores/ToastNotificationStore';
 
 const { t } = useI18n();
 

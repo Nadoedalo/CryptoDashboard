@@ -26,6 +26,7 @@ export default {
   },
   errors: {
     fetchCoinList: 'Failed to fetch coin list',
+    fetchHistoricalData: 'Failed to fetch historical data',
   },
   managePortfolio: {
     title: 'Monitor & Manage holdings in portfolio',
@@ -66,5 +67,15 @@ export default {
     totalLoss: 'Total loss:',
     bestAsset: 'Best asset:',
     worstAsset: 'Worst asset:',
+  },
+  dashboard: {
+    distributionTitle: 'Portfolio Distribution (by Current Price)',
+    historicalEvaluationTitle: 'Historical Evaluation (Past 3 Days)',
+    noPortfolio: 'No portfolio yet, try adding some holdings to your portfolio',
+    addHolding: 'Add holding',
+  },
+  pieChart: {
+    others: 'Others',
+    back: 'Back',
   },
 };

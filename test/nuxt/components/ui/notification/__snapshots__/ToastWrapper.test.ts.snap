@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ToastWrapper > renders toasts from the store and matches snapshot 1`] = `
+"<div class="notificationWrapper">
+  <div class="notificationItem error">Something went wrong</div>
+  <div class="notificationItem success">Operation successful</div>
+  <div class="notificationItem warning">Be careful!</div>
+</div>"
+`;

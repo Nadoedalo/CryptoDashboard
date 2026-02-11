@@ -1,8 +1,8 @@
 <template>
-  <client-only>
-    <v-container
-      class="editPortfolio"
-    >
+  <v-container
+    class="editPortfolio"
+  >
+    <template v-if="portfolioStore.portfolio.length">
       <div class="d-flex justify-space-between align-center pb-2">
         <h4>{{ $t('managePortfolio.title') }}</h4>
         <v-btn
@@ -23,7 +23,7 @@
       <v-data-table
         :filter-keys="['coin.id', 'coin.symbol', 'coin.name']"
         :headers="getHeaders"
-        :items="getHoldings"
+        :items="portfolioStore.getHoldingsSummary"
         :loading="coinStore.isCoinArrLoading"
         :search="searchQuery"
         class="pt-0"
@@ -87,26 +87,37 @@
           >{{ holding.priceChangePercentage24.toFixed(2) }}%</span>
         </template>
       </v-data-table>
-      <v-dialog
-        v-model="isEditDialogOpen"
-        max-width="500"
-      >
-        <PortfolioHoldingCard
-          v-if="selectedHolding"
-          :holding="selectedHolding"
-          @updated="() => { isEditDialogOpen = false; selectedHolding = null; }"
-          @deleted="() => { isEditDialogOpen = false; selectedHolding = null; }"
-        />
-      </v-dialog>
-    </v-container>
-  </client-only>
+    </template>
+    <SharedNoHoldings
+      v-else-if="!coinStore.isCoinArrLoading"
+    />
+    <v-row
+      v-else
+      justify="center"
+      align="center"
+      class="flex-grow-1"
+    >
+      <v-skeleton-loader type="heading, table-row@10" />
+    </v-row>
+    <v-dialog
+      v-model="isEditDialogOpen"
+      max-width="500"
+    >
+      <PortfolioHoldingCard
+        v-if="selectedHolding"
+        :holding="selectedHolding"
+        @updated="() => { isEditDialogOpen = false; selectedHolding = null; }"
+        @deleted="() => { isEditDialogOpen = false; selectedHolding = null; }"
+      />
+    </v-dialog>
+  </v-container>
 </template>
 
 <script setup lang="ts">
-import { usePortfolioStore } from '@stores/PortfolioStore';
-import { type ICoinListType, useCoinStore } from '@stores/CoinStore';
-import type { ICoin } from '@types';
-import type { IHolding } from '@stores/PortfolioStore';
+import { type IHoldingSummary, usePortfolioStore } from '@stores/PortfolioStore';
+
+import { useCoinStore } from '@stores/CoinStore';
+
 import { useI18n } from 'vue-i18n';
 
 interface IHoldingTableHeader {
@@ -114,61 +125,18 @@ interface IHoldingTableHeader {
   key: string;
   sortable?: boolean;
 }
-interface IHoldingTableRow {
-  coin: ICoin & { image: ICoinListType['image']; };
-  quantity: IHolding['quantity'];
-  price: IHolding['price'];
-  evaluation: number;
-  difference: number;
-  percentage: number;
-  priceChangeAbsolute24: ICoinListType['price_change_24h'];
-  priceChangePercentage24: ICoinListType['price_change_percentage_24h'];
-  high24: ICoinListType['high_24h'];
-  low24: ICoinListType['low_24h'];
-}
 
 const { t } = useI18n();
 const coinStore = useCoinStore();
 const portfolioStore = usePortfolioStore();
 const searchQuery = ref<string>('');
 const isEditDialogOpen = ref(false);
-const selectedHolding = ref<IHolding | null>(null);
+const selectedHolding = ref<IHoldingSummary | null>(null);
 
-const getListCoinById = computed(() => (coinId: ICoin['id']) => coinStore.getCoinById(coinId));
-const getInvestmentAmount = computed(() => (holding: IHolding) => holding.quantity * holding.price);
-const getCurrentValueAmount = computed(() => (holding: IHolding) => holding.quantity * (getListCoinById.value(holding!.coin!.id)?.current_price || 0));
-const totalDifference = computed(() => (holding: IHolding) => getCurrentValueAmount.value(holding) - getInvestmentAmount.value(holding));
-const percentageDifference = computed(() => (holding: IHolding) => (totalDifference.value(holding) / getInvestmentAmount.value(holding)) * 100);
-const isProfitable = computed(() => (holding: IHolding) => totalDifference.value(holding) > 0);
-
-const getHoldings = computed(() => {
-  return portfolioStore.portfolio.reduce((memo, holding) => {
-    const coin = getListCoinById.value(holding.coin?.id);
-    if (coin) {
-      memo.push({
-        coin: {
-          id: coin.id,
-          symbol: coin.symbol,
-          name: coin.name,
-          image: coin.image,
-        },
-        quantity: holding.quantity,
-        price: +holding.price.toFixed(2),
-        evaluation: +getCurrentValueAmount.value(holding).toFixed(2),
-        difference: +totalDifference.value(holding).toFixed(2),
-        percentage: +percentageDifference.value(holding).toFixed(2),
-        priceChangeAbsolute24: coin.price_change_24h,
-        priceChangePercentage24: coin.price_change_percentage_24h,
-        high24: coin.high_24h,
-        low24: coin.low_24h,
-      });
-    }
-    return memo;
-  }, [] as IHoldingTableRow[]);
-});
+const isProfitable = computed(() => (holding: IHoldingSummary) => holding.difference > 0);
 
 const getHeaders = computed(() => {
-  const res = Object.keys(getHoldings.value?.[0] || {}).reduce((memo, key) => {
+  const res = Object.keys(portfolioStore.getHoldingsSummary?.[0] || {}).reduce((memo, key) => {
     memo.push({
       title: t(`portfolioDataTable.${key}`),
       key,
@@ -184,7 +152,7 @@ const getHeaders = computed(() => {
   return res;
 });
 
-function editHolding(holding: IHoldingTableRow) {
+function editHolding(holding: IHoldingSummary) {
   selectedHolding.value = holding;
   isEditDialogOpen.value = true;
 }
@@ -193,6 +161,7 @@ function editHolding(holding: IHoldingTableRow) {
 <style lang="scss">
 @use "@imports/colors.module";
 .editPortfolio {
+  max-width: 100% !important;
   .profitLoss {
     color: colors.$red;
   }

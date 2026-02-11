@@ -50,7 +50,6 @@ export const useToastNotificationStore = defineStore('ToastNotificationStore', (
     toastsArr.value = toastsArr.value.filter(item => item.id !== toast.id);
   }
 
-  /* Not pretty and should have been something like uuid but it works */
   function nextId() {
     toastId.value += 1;
     return toastId.value;

@@ -42,8 +42,30 @@ It also serves as a showcase for my Nuxt 4 skills.
   - TODO: Deploy the contents of the `dist/` folder to the production
 
 # Architecture overview
-- TODO
+Overall, the architecture of the project is fairly standard to a Nuxt 4 application.
+
+All the initial information about the project is available in the [Design Doc.md](./documentation/Design_Document.md);
+As for the `Application` aka `src/` folder structure, it goes as follows:
+- `components/` - contains all the Vue components used throughout the app, notably:
+- - `ui/` - global UI components like sidebars and notifications
+- - `shared/` - abstract components that implement common logic
+- - All other components implement features for a specific module
+- `config` - contains the main configuration for the app
+- - <strong>Needs `COINGECKO_API_KEY` to be filled, otherwise the app won't work</strong>
+- `lang/` contains the translations, currently only English is supported
+- `utils/` - contains helper functions, in particular a fetchHelper that wraps the native fetch API
+
+In terms of coupling, the UI is loosely coupled to the data layer through the use of Pinia to gather the data flow in one module, increase performance and maintainability.
+Main entities that play a role are the `portfolio` and `coin` modules.
+- `coin` module provides raw data about the top 250 coins from the CoinGecko API and auto-updates it every minute
+- `portfolio` module aggregates the data from the `coin` module and provides the portfolio management capabilities
+
 
 # Any known limitations or future improvements
+- "cold" start could result in an error and just needs a refresh, seems to be a quirk of SSR in Nuxt 4
 - ESLint is of version 9 because version 10 just released a couple of days ago, other packages need to be updated before we use latest
 - I don't like warnings and deprecated packages used as a peer dependency, hence I've overwritten some to the proper version
+- There are some warnings due to SSR mismatches, at components install due to amCharts 5 using outdated / deprecated libraries and in tests – those are minor but are annoying
+- The app only nominally has responsiveness
+- The "light" theme color schema honestly could use some work
+- App is responsive but doesn't have state-of-the-art transitions to tablet / mobile

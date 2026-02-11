@@ -1,13 +1,16 @@
 <template>
   <div class="d-flex align-center ga-2">
-    <v-img
-      :src="imageSrc"
-      :alt="altText"
-      eager
-      height="2em"
-      width="2em"
-      class="flex-grow-0"
-    />
+    <client-only>
+      <v-img
+        v-if="imageSrc"
+        :src="imageSrc"
+        :alt="altText"
+        eager
+        height="2em"
+        width="2em"
+        class="flex-grow-0"
+      />
+    </client-only>
     <span>{{ title }}</span>
   </div>
 </template>

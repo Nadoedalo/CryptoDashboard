@@ -3,7 +3,7 @@
     v-if="toastNotificationStore.getActiveToastArr.length"
     class="notificationWrapper"
   >
-    <NotificationToastItem
+    <UiNotificationToastItem
       v-for="toast in toastNotificationStore.getActiveToastArr"
       :key="toast.id"
       v-bind="toast"
@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useToastNotificationStore } from '@/stores/ToastNotificationStore';
+import { useToastNotificationStore } from '@stores/ToastNotificationStore';
 
 const toastNotificationStore = useToastNotificationStore();
 </script>

@@ -8,10 +8,15 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxtjs/i18n',
-    '@nuxt/test-utils/module',
     '@pinia/nuxt',
+    '@nuxt/test-utils/module',
   ],
   devtools: { enabled: true },
+  app: {
+    baseURL: '/',
+    pageTransition: { name: 'slide-right', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' },
+  },
   srcDir: 'src/',
   alias: {
     '@': resolve('./src'),
