@@ -118,7 +118,7 @@ vi.mock('@stores/ToastNotificationStore', () => ({
 
 describe('PortfolioStore', () => {
   beforeEach(() => {
-    const pinia = createTestingPinia({
+    createTestingPinia({
       createSpy: vi.fn,
     });
     vi.clearAllMocks();
