@@ -1,9 +1,8 @@
 <template>
   <client-only>
-    <!-- expand-on-hover can be a computed to disable on mobile resolutions -->
     <v-navigation-drawer
       class="dashboardSidebar overflow-auto"
-      expand-on-hover
+      :expand-on-hover="!mobile"
       permanent
       rail
       color="teal-dark"
@@ -82,7 +81,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import { useTheme } from 'vuetify';
+import { useTheme, useDisplay } from 'vuetify';
 import { useCoinStore } from '@/stores/CoinStore';
 
 interface ILink {
@@ -92,6 +91,7 @@ interface ILink {
 }
 
 const { t } = useI18n();
+const { mobile } = useDisplay();
 const theme = useTheme();
 
 const toggleTheme = () => {
@@ -136,5 +136,9 @@ const links: ILink[] = [
 </script>
 
 <style lang="scss">
-@use "@imports/colors.module";
+.dashboardSidebar {
+  .dynamicLinksContent {
+    overflow-y: auto !important;
+  }
+}
 </style>

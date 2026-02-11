@@ -1,12 +1,13 @@
 <template>
   <v-container
     class="addToPortfolio"
+    rel="addToPortfolioRef"
   >
     <v-form
       ref="addToPortfolioForm"
       @submit.prevent="handleSubmit"
     >
-      <v-card>
+      <v-card class="overflow-visible">
         <v-card-title>{{ $t('addToPortfolio.title') }}</v-card-title>
         <v-card-text>
           <v-autocomplete
@@ -18,6 +19,8 @@
             item-value="id"
             :filter-keys="['value', 'raw.symbol', 'title']"
             autocomplete="suppress"
+            :menu-props="{ attach: addToPortfolioRef as Element, contained: true }"
+            class="selectCoinAutocomplete position-relative"
           >
             <template #selection="{ item: coinItem }">
               <v-list-item
@@ -103,6 +106,7 @@ import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
+const addToPortfolioRef = ref<HTMLElement | null>(null);
 const coinStore = useCoinStore();
 const portfolioStore = usePortfolioStore();
 const toastStore = useToastNotificationStore();
@@ -147,5 +151,9 @@ function handleSubmit() {
 </script>
 
 <style lang="scss">
-@use "@imports/colors.module";
+.addToPortfolio {
+  .selectCoinAutocomplete {
+    z-index: 10;
+  }
+}
 </style>
