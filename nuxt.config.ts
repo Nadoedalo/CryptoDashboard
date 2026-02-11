@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   ],
   devtools: { enabled: true },
   app: {
-    baseURL: '/',
+    baseURL: 'CryptoDashboard/',
     pageTransition: { name: 'slide-right', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' },
   },
