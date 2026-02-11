@@ -9,7 +9,7 @@
         {{ $t('portfolioSummary.title') }}
       </h4>
       <v-card
-        class="pa-2"
+        class="pa-2 overflow-auto"
         :loading="coinStore.isCoinArrLoading"
       >
         <template #loader>
