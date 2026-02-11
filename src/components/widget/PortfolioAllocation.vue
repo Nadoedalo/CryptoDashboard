@@ -189,8 +189,7 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style>
-@use "@imports/_colors.module";
+<style lang="scss">
 .portfolioAllocation {
   position: relative;
   .backButton {
